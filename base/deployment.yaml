@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: listmonk
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: listmonk
+      containers:
+      - name: listmonk
+        image: listmonk-image
+        ports:
+        - containerPort: 9000
+        envFrom:
+        - configMapRef:
+            name: listmonk-env

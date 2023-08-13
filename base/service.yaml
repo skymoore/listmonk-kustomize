@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: listmonk
+spec:
+  selector:
+    app: listmonk
+  ports:
+    - name: listmonk
+      protocol: TCP
+      port: 9000
+      targetPort: 9000

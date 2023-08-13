@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: listmonk
+
+labels:
+  - includeSelectors: true
+    pairs:
+      app: listmonk
+
+images:
+  - name: listmonk-image
+    newName: listmonk/listmonk
+    newTag: v2.5.0
+
+resources:
+  - ../../base
+  - certificate.yaml
+  - ingress.yaml
+  - secrets.yaml
+
+patches:
+  - path: deployment.yaml
+
+configMapGenerator:
+  - name: listmonk-env
+    behavior: replace
+    envs:
+      - config/listmonk.env
